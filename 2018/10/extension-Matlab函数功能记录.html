@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="matlab,functions," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Nautilu_Nemo" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Matlab函数功能记录intDefinite and indefinite integrals 有限和无限积分  Syntax  int(expr,var) int(expr,var,a,b) int(_,Name,Value)   Description  int(expr,var) -compute the indefinite integral of expr with respect t">
+<meta name="keywords" content="matlab,functions">
+<meta property="og:type" content="article">
+<meta property="og:title" content="matlab函数记录">
+<meta property="og:url" content="http://log.xiaohaoming.com/2018/10/extension-Matlab函数功能记录.html">
+<meta property="og:site_name" content="Nautilu_Nemo">
+<meta property="og:description" content="Matlab函数功能记录intDefinite and indefinite integrals 有限和无限积分  Syntax  int(expr,var) int(expr,var,a,b) int(_,Name,Value)   Description  int(expr,var) -compute the indefinite integral of expr with respect t">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://cn.bing.com/az/hprichbg/rb/Gauchos_EN-US9437338004_1920x1080.jpg">
+<meta property="og:updated_time" content="2018-10-10T05:46:41.467Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="matlab函数记录">
+<meta name="twitter:description" content="Matlab函数功能记录intDefinite and indefinite integrals 有限和无限积分  Syntax  int(expr,var) int(expr,var,a,b) int(_,Name,Value)   Description  int(expr,var) -compute the indefinite integral of expr with respect t">
+<meta name="twitter:image" content="http://cn.bing.com/az/hprichbg/rb/Gauchos_EN-US9437338004_1920x1080.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://log.xiaohaoming.com/2018/10/extension-Matlab函数功能记录.html"/>
+
+
+
+
+
+  <title>matlab函数记录 | Nautilu_Nemo</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?41fc030db57d5570dd22f78997dc4a7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Nautilu_Nemo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://log.xiaohaoming.com/2018/10/extension-Matlab函数功能记录.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XIAOHAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nautilu_Nemo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">matlab函数记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-10T13:46:41+08:00">
+                2018-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/extension/" itemprop="url" rel="index">
+                    <span itemprop="name">extension</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/extension-Matlab函数功能记录.html" class="leancloud_visitors" data-flag-title="matlab函数记录">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://cn.bing.com/az/hprichbg/rb/Gauchos_EN-US9437338004_1920x1080.jpg" rel="gallery_cjo4cefqi00338kth3dnk9yuf"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://cn.bing.com/az/hprichbg/rb/Gauchos_EN-US9437338004_1920x1080.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h2 id="Matlab函数功能记录"><a href="#Matlab函数功能记录" class="headerlink" title="Matlab函数功能记录"></a>Matlab函数功能记录</h2><h3 id="int"><a href="#int" class="headerlink" title="int"></a><a href="https://ww2.mathworks.cn/help/symbolic/int.html?s_tid=doc_ta" target="_blank" rel="noopener">int</a></h3><p>Definite and indefinite integrals</p>
+<p>有限和无限积分</p>
+<ul>
+<li><p><strong>Syntax</strong></p>
+<ul>
+<li>int(expr,var)</li>
+<li>int(expr,var,a,b)</li>
+<li>int(_,Name,Value)</li>
+</ul>
+</li>
+<li><p><strong>Description</strong></p>
+<ul>
+<li><p>int(expr,var) -compute the indefinite integral of expr with respect to the symbolic scalar variable var.</p>
+<p>int(expr,var) -计算使用期待符号标量变量var的expr的无限积分</p>
+</li>
+<li><p>int(expr,var,a,b) -computes the definite integral of expr with respect to var from a to b. If you do not specific it, int use the default variable determined by symvar. If expr is a constant, then the default variable is x.</p>
+<p>int(expr,var,a,b) -计算使用期待从a到b的var的expr有限的积分</p>
+</li>
+<li><p>int(_,Name,Value)</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Input Arguments</strong></p>
+<ul>
+<li><p>expr - Integrand 积分</p>
+<p>symbolic expression | symbolic function | symbolic vector | symbolic matrix | symbolic number</p>
+</li>
+<li><p>var  Integration variable 积分变量</p>
+<p>symbolic variable </p>
+</li>
+<li><p>a - Lower bound </p>
+<p>number | symbolic number | symbolic variable | symbolic expression | symbolic function</p>
+</li>
+<li><p>b - Upper bound</p>
+<p>number | symbolic number | symbolic variable | symbolic expression | symbolic function</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Name-Value Pair Arguments</strong></p>
+</li>
+</ul>
+<h3 id="plotfit"><a href="#plotfit" class="headerlink" title="plotfit"></a><a href="https://ww2.mathworks.cn/help/nnet/ref/plotfit.html?searchHighlight=plotfit&amp;s_tid=doc_srchtitle" target="_blank" rel="noopener">plotfit</a></h3><ul>
+<li><p><strong>Syntax</strong></p>
+<p>plotfit(net,inputs,targets)</p>
+<p>plotfit(targets1,inouts1,’name’,…)</p>
+</li>
+<li><p><strong>Description</strong></p>
+<p>plotfit(net,input,targets)画贯穿范围inputs inputs和画target targets和关联inputs的值的output data point的神经网络输出函数。Error bar将会展示介于outputs和targets不同</p>
+<p>The plot 出现仅是在神经网络用于第一次input</p>
+<p>如果神经网络有超过一次的输出，仅是第一次output/targets 出现<br><code>plotfit(targets1,inputs1,&#39;name1&#39;,...)</code> displays a series of plots.</p>
+</li>
+</ul>
+<h3 id="lsqcurvefit"><a href="#lsqcurvefit" class="headerlink" title="lsqcurvefit"></a><a href="https://ww2.mathworks.cn/help/optim/ug/lsqcurvefit.html?s_tid=doc_ta#d119e74978" target="_blank" rel="noopener">lsqcurvefit</a></h3><p>解决非线性曲线拟合问题使用最小二乘法</p>
+<h3 id="fzero"><a href="#fzero" class="headerlink" title="fzero"></a><a href="https://ww2.mathworks.cn/help/matlab/ref/fzero.html?lang=en#btoc6lj-18" target="_blank" rel="noopener">fzero</a></h3><p>求解非线性函数根</p>
+<p>查找线性函数求解根或者其他相关函数，请在命令行输入 help fzero</p>
+<ul>
+<li>Description</li>
+</ul>
+<p>x = fzero(fun,x0)<br>tries to find a point x where fun(x) = 0. This solution is where fun(x) changes sign—fzero cannot find a root of a function such as x^2.<br>尝试发现一个fun(x)=0的x值.解决方案是通过fun(x)在两点x值不同符号慢慢逼近fun(x)=0，所以不能发现像x^2这样函数的根</p>
+<p>x = fzero(fun,x0,options)<br>uses options to modify the solution process.</p>
+<p>x = fzero(problem)<br>solves a root-finding problem specified by problem.</p>
+<p>[x,fval,exitflag,output] = fzero(___)<br>returns fun(x) in the fval output, exitflag encoding the reason fzero stopped, and an output structure containing information on the solution process.</p>
+<p>输入参数说明：<br>fun :函数句柄<br>例：’sin’<br>​       @myFunction<br>​       @(x)(x-a)^5<br>x0:1：区间（这个包含根的x的区间，即输入区间端点的x值必须fun(x)值符号不同）2：实数 较接近根的值<br>例：3<br>例：[2,17]</p>
+<h3 id="randn"><a href="#randn" class="headerlink" title="randn"></a>randn</h3><p>*【未看】2：randn - Normally distributed pseudorandom numbers(正态分布伪随机数)<br> 这个函数返回一个被标准正态分布绘制的伪随机标量<br>​    r = randn(n)<br>​    r = randn(sz1,…,szN)<br>​    r = randn(sz)<br>​    r = randn(classname)<br>​    r = randn(n,classname)<br>​    r = randn(sz1,…,szN,classname)<br>​    r = randn(sz,classname)<br>​    r = randn(‘like’,p)<br>​    r = randn(n,’like’,p)<br>​    r = randn(sz1,…,szN,’like’,p)<br>​    r = randn(sz,’like’,p)</p>
+<h3 id="orth-Orthonormal-basis-for-range-of-matrix（矩阵值域的正交基）"><a href="#orth-Orthonormal-basis-for-range-of-matrix（矩阵值域的正交基）" class="headerlink" title="orth - Orthonormal basis for range of matrix（矩阵值域的正交基）"></a>orth - Orthonormal basis for range of matrix（矩阵值域的正交基）</h3><p>   Q = orth(A)<br>   这个函数返回A矩阵的值域正交基<br>   注释：矩阵与其本身的转置矩阵乘积为E</p>
+<h3 id="logspace-Generate-logarithmically-spaced-vertors-生成对数间隔向量"><a href="#logspace-Generate-logarithmically-spaced-vertors-生成对数间隔向量" class="headerlink" title="logspace - Generate logarithmically spaced vertors  生成对数间隔向量"></a>logspace - Generate logarithmically spaced vertors  生成对数间隔向量</h3><p>​    y = logspace(a,b)<br>​    y = logspace(a,b,n)<br>​    y = logspace(a,pi)<br>   这个函数生成介于10^a和10^b的50个对数间隔点行向量 y。</p>
+<h3 id="diag-Get-diagonal-elements-or-create-diagonal-matrix-获取对角线元素或创建对角矩阵"><a href="#diag-Get-diagonal-elements-or-create-diagonal-matrix-获取对角线元素或创建对角矩阵" class="headerlink" title="diag -Get diagonal elements or create diagonal matrix 获取对角线元素或创建对角矩阵"></a>diag -Get diagonal elements or create diagonal matrix 获取对角线元素或创建对角矩阵</h3><p>   这个函数返回矢量v元素在main(k=0)对角的对角矩阵方阵</p>
+<h3 id="inv-Matrix-inverse-逆矩阵"><a href="#inv-Matrix-inverse-逆矩阵" class="headerlink" title="inv Matrix inverse(逆矩阵)"></a>inv Matrix inverse(逆矩阵)</h3><p>​       Y = inv(x)<br>​    一般极少使用，一个不恰当的使用是求线性方程Ax=b,一种解决方案是x=inv(A)*b,从执行时间和数值精确点，应该使用矩阵除法操作符 x=A\b</p>
+<h3 id="dsolve-Ordinary-differential-equation-and-system-solver"><a href="#dsolve-Ordinary-differential-equation-and-system-solver" class="headerlink" title="dsolve -Ordinary differential equation and system solver"></a>dsolve -<a href="https://ww2.mathworks.cn/help/symbolic/dsolve.html?searchHighlight=dsolve&amp;s_tid=doc_srchtitle" target="_blank" rel="noopener">Ordinary differential equation and system solver</a></h3><p>​       解常微分方程和系统求解器<br>​       S = dsolve(eqn)<br>​       S = dsolve(eqn,cond)<br>​       S = dsolve(eqn,cond,Name,Value)<br>​       [y1,…,yN] = dsolve(___)<br>​      note: Character vector inputs will be removed in a future release. Instead, use syms to declare variables and<br>​      replace inputs such as dsolve(‘Dy = y’) with syms y(t); dsolve(diff(y,t) == y).</p>
+<h3 id="plot-2-D-line-plot"><a href="#plot-2-D-line-plot" class="headerlink" title="plot - 2-D line plot"></a>plot - <a href="https://ww2.mathworks.cn/help/matlab/ref/plot.html?lang=en#btzitot-ax" target="_blank" rel="noopener">2-D line plot</a></h3><p>plot(X,Y)<br>plot(X,Y,LineSpec)<br>plot(X1,Y1,…,Xn,Yn)<br>plot(X1,Y1,LineSpec1,…,Xn,Yn,LineSpecn)<br>plot(Y)<br>plot(Y,LineSpec)<br>plot(<strong><em>,Name,Value)<br>plot(ax,</em></strong>)<br>h = plot(___)</p>
+<p>plot(X,Y)<br>creates a 2-D line plot of the data in Y versus the corresponding values in X.<br>使用数据Y相对符合值X创造一个2-D线性图</p>
+<ul>
+<li>X Data Types: single | double | int8 | int16 | int32 | int64 | uint8 | uint16 | uint32 | uint64 | categorical | datetime | duration</li>
+<li>Y Data Types: single | double | int8 | int16 | int32 | int64 | uint8 | uint16 | uint32 | uint64 | categorical | datetime | duration</li>
+</ul>
+<p>plot(X,Y,LineSpec)<br>plot(X,Y,LineSpec) sets the line style, marker symbol, and color.<br>画plot(X,Y,LineSpec)设置线风格，标记符号和原色</p>
+<ul>
+<li>LineSpec — Line style, marker, and color</li>
+</ul>
+<p>character vector | string</p>
+<p>plot(___,Name,Value)<br>specified line properties using one or more name,value pair arguments.For a list of properties,see Line Properties(<a href="https://ww2.mathworks.cn/help/matlab/ref/" target="_blank" rel="noopener">https://ww2.mathworks.cn/help/matlab/ref/</a><br>matlab.graphics.chart.primitive.line-properties.html?lang=en).Use this option with any of the input argument combinations in the previous syntaxes.Name-value<br>pair apply to all the lines plotted.<br>使用一个或者多个name,value对属性来指定line properties.使用这些选项可以和在上面语法中任意输入参数结合.Name-Value对应用于所有画线。</p>
+<p>plot(ax,___)<br>creates the line in the axes specified by ax instead of in the current axes(gca).The option ax can precede andy of the input argument combinations in<br>the previous syntaxes<br>在AX指定的轴中创建行，而不是在当前轴（GCA）中创建。选项AX可以先于前一个语法中的任何输入参数组合。</p>
+<h3 id="magic-Magic-square"><a href="#magic-Magic-square" class="headerlink" title="magic - Magic square"></a>magic - Magic square</h3><p> This MATLAB function returns an n-by-n matrix construced from the integers 1 through n^2<br>with row and column sums.<br>这个函数将会返回一个从整数1至n^2的行和列的和都相等的n阶矩阵  </p>
+<h3 id="fplot"><a href="#fplot" class="headerlink" title="fplot"></a><a href="https://ww2.mathworks.cn/help/matlab/ref/fplot.html?lang=en" target="_blank" rel="noopener">fplot</a></h3><p>Plot expression or function<br>画函数或者表达式<br>区别于plot</p>
+<ul>
+<li>Syntax</li>
+</ul>
+<p>fplot(f) 默认的函数范围为[-5 5]<br>fplot(f,xinterval)<br>fplot(funx,funy)<br>fplot(funx,funy,tinterval)<br>fplot(<strong><em>,LineSpec)<br>fplot(</em></strong>,Name,Value)<br>fplot(ax,<strong><em>)<br>fp = fplot(</em></strong>)<br>[x,y] = fplot(）</p>
+<ul>
+<li>Input Argutments</li>
+</ul>
+<p>f – Function to plot<br>function handle 函数句柄<br>函数将要画的，以命名的或者匿名的函数句柄来指定<br>指定函数的组成 y = f(x).这个函数期待一个矢量输入参数和返回一个相同的大小的矢量输出参数。使用数组操作符代替矩阵操作符。例如，使用.<em>(times) 代替</em>(mtimes)</p>
+<h3 id="compan-Companion-Matrix-伴随矩阵"><a href="#compan-Companion-Matrix-伴随矩阵" class="headerlink" title="compan - Companion Matrix 伴随矩阵"></a>compan - Companion Matrix 伴随矩阵</h3><ul>
+<li>Syntax - 语法</li>
+</ul>
+<p>A = compan(u)</p>
+<ul>
+<li>Description - 描述</li>
+</ul>
+<p>A = compan(u) returns the corresponding matrixs these first row is -u(2:n)/u(1),where u is a vector of ploynomial coefficients.The eigenvalues of compan(u)<br>are the roots of the ploynomial</p>
+<ul>
+<li>A = compan(u) 返回第一行是 -u(2:n)/u(1)的符合矩阵，其中u是一个多项式系数矢量。eig( compan(u) )特征值是多项式的根 </li>
+</ul>
+<h3 id="surf-3-D-影表面画图-未看"><a href="#surf-3-D-影表面画图-未看" class="headerlink" title="surf - 3-D 影表面画图 -未看"></a>surf - 3-D 影表面画图 -未看</h3><ul>
+<li><p><strong>description</strong></p>
+<p>这个函数功能根据z矩阵【m,n】=size(z)，使用x = 1:n和y = 1:m创造一个 three-dimensional shaded surface</p>
+</li>
+<li><p><strong>Syntax</strong></p>
+<p>​    surf(Z)<br>​    surf(Z,C)<br>​    surf(X,Y,Z)<br>​    surf(X,Y,Z,C)<br>​    surf(…,’PropertyName’,PropertyValue)<br>​    surf(axes_handles,…)<br>​    h = surf(…)</p>
+</li>
+<li><p><strong>Example</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="number">1</span>:<span class="number">0.3</span>:<span class="number">5</span>)';   <span class="comment">% ’属于转置</span></span><br><span class="line">y = x';</span><br><span class="line">V = <span class="built_in">cos</span>(x) * <span class="built_in">sin</span>(y);</span><br><span class="line">n = <span class="built_in">length</span>(x);</span><br><span class="line">surf(<span class="number">1</span>:n,<span class="number">1</span>:n,V)   <span class="comment">% surf(X,Y,Z)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="ppval-计算分段多项式"><a href="#ppval-计算分段多项式" class="headerlink" title="ppval - 计算分段多项式"></a>ppval - 计算分段多项式</h3><ul>
+<li><p><strong>Syntax</strong></p>
+<p>v = ppval(pp,xq) </p>
+</li>
+<li><p><strong>Describle</strong></p>
+<p><code>v = ppval(pp,xq)</code> 在查询点 <code>xq</code> 处计算分段多项式 <code>pp</code>。 </p>
+</li>
+<li><p><strong>example</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">breaks = [<span class="number">0</span> <span class="number">4</span> <span class="number">10</span> <span class="number">15</span>];  <span class="comment">%断点 区间分别为 [0,4] [4,10] [10,15]</span></span><br><span class="line">coefs = [<span class="number">0</span> <span class="number">1</span> <span class="number">-1</span> <span class="number">1</span> <span class="number">1</span>; <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">-2</span> <span class="number">53</span>; <span class="number">-1</span> <span class="number">6</span> <span class="number">1</span> <span class="number">4</span> <span class="number">77</span>]; <span class="comment">%对应多项式系数 5列:代表最高次数为5 </span></span><br><span class="line">pp = mkpp(breaks,coefs); <span class="comment">%创建分段多项式</span></span><br><span class="line">xq = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">15</span>;</span><br><span class="line">plot(xq,ppval(pp,xq))  <span class="comment">%计算多项式值和画函数</span></span><br><span class="line">line([<span class="number">4</span> <span class="number">4</span>],ylim,<span class="string">'LineStyle'</span>,<span class="string">'--'</span>,<span class="string">'Color'</span>,<span class="string">'k'</span>)</span><br><span class="line">line([<span class="number">10</span> <span class="number">10</span>],ylim,<span class="string">'LineStyle'</span>,<span class="string">'--'</span>,<span class="string">'Color'</span>,<span class="string">'k'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="diff-微分符号函数或者函数"><a href="#diff-微分符号函数或者函数" class="headerlink" title="diff - 微分符号函数或者函数"></a>diff - 微分符号函数或者函数</h3><ul>
+<li><p><strong>Syntax</strong> - <strong>Describle</strong></p>
+<p><code>diff(F)</code>微分F被symvar(F,1)决定的期待变量</p>
+<p><code>diff(F,var)</code> 微分F通过求导var变量</p>
+<p><code>diff(F,n)</code> 计算n次导通过对symvar决定的变量</p>
+<p><code>diff(F,var,n)</code></p>
+<p><code>diff(F,var1,...,varN)</code> </p>
+</li>
+<li><p><strong>Input Argument</strong></p>
+<p><strong>F</strong> –表达式或者函数将要被微分的</p>
+<p>symbolic expression | symbolic function | symbolic vector | symbolic matrix</p>
+</li>
+<li><p><strong>Example</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ res ]</span> = <span class="title">Test_Interpolation</span><span class="params">(  )</span></span></span><br><span class="line"><span class="comment">%Describe  Find the derivative of the function sin(x^2).</span></span><br><span class="line"><span class="comment">%Syntax diff(F)</span></span><br><span class="line">syms f(x);   <span class="comment">%定义一个函数变量</span></span><br><span class="line">f(x) = <span class="built_in">sin</span>(x^<span class="number">2</span>);  <span class="comment">%symbolic function</span></span><br><span class="line"><span class="comment">%res = diff('sin(x^2)',x); symbolic expression</span></span><br><span class="line">res = diff(f,x);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ res ]</span> = <span class="title">Test_Interpolation</span><span class="params">(  )</span></span></span><br><span class="line"><span class="comment">%Describe  Differentiation with Respect to Particular Variable</span></span><br><span class="line"><span class="comment">%Syntax diff(F,var)</span></span><br><span class="line">sym x t;</span><br><span class="line"><span class="comment">%symvar(t,1) %默认变量为x,你可以通过这个函数决定默认变量</span></span><br><span class="line"><span class="comment">%也可以通过设置var</span></span><br><span class="line">res = diff(<span class="built_in">sin</span>(x * t^<span class="number">2</span>),t); <span class="comment">%符号函数</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ res ]</span> = <span class="title">Test_Interpolation</span><span class="params">(  )</span></span></span><br><span class="line"><span class="comment">%Describe Higher-Order Derivatives of Univariate(单一的) Expression</span></span><br><span class="line"><span class="comment">%高阶求导</span></span><br><span class="line"><span class="comment">%Syntax diff(F,n)</span></span><br><span class="line">syms t;</span><br><span class="line">res = diff(t^<span class="number">6</span>,<span class="number">4</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ res ]</span> = <span class="title">Test_Interpolation</span><span class="params">(  )</span></span></span><br><span class="line"><span class="comment">%Describe Mixed Derivatives</span></span><br><span class="line"><span class="comment">%Syntax diff(F,var1,...,varN) </span></span><br><span class="line">syms x y;</span><br><span class="line">res = diff(x * <span class="built_in">sin</span>(x * y),x,y); <span class="comment">%先对x求导在对y求导</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="symvar-在符号输入中发现符号变量"><a href="#symvar-在符号输入中发现符号变量" class="headerlink" title="symvar - 在符号输入中发现符号变量"></a>symvar - 在符号输入中发现符号变量</h3><p>  Find symbolic variables of symbolic input</p>
+<p>  <strong>Syntax</strong> </p>
+<ul>
+<li><p>symvar(s)</p>
+<p>它通过矢量方式返回在s中的符号变量。变量是以按字母顺序返回并且大写字母优于小写字母返回</p>
+</li>
+<li><p>symvar(s,n)</p>
+<p>它选择按字母顺序最接近x的在s中的n个符号变量和返回它们以字母顺序。如果s是符号函数，symvar(s,n)返回s中的输入参数在s中的其他变量之前。</p>
+<p><strong>Input arguments</strong></p>
+</li>
+<li><p><strong>s – input</strong></p>
+<p>number | vector | matrix | array | symbolic number | symbolic variable | symbolic array | symbolic function | symbolic expression</p>
+</li>
+<li><p><strong>n – Number of variables</strong></p>
+<p>integer</p>
+<p><strong>Example</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fout</span> = <span class="title">Test</span><span class="params">(a,b,c)</span></span></span><br><span class="line"><span class="comment">%Describe Find symbolic variables in expression</span></span><br><span class="line"><span class="comment">%Syntax symvar(s)  </span></span><br><span class="line">syms wa wb ya yb</span><br><span class="line">sum = wa +wb + ya + yb;</span><br><span class="line">symvar(sum) <span class="comment">%按字母顺序返回变量 wa wb ya yb</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function fout = Test(a,b,c)</span><br><span class="line">%Describe Find Default variable of expression</span><br><span class="line">%Syntax symvar(s,n)  </span><br><span class="line">syms v z</span><br><span class="line">g = v + z;</span><br><span class="line">symvar(g,1) %发现默认自变量 z</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h3 id="subs-符号代替"><a href="#subs-符号代替" class="headerlink" title="subs - 符号代替"></a>subs - 符号代替</h3><p><strong>Syntax</strong></p>
+</li>
+<li><p>subs(s,old,new)</p>
+<p>返回一个s的复制，代替所有的old的出现为new，和计算s</p>
+</li>
+<li><p>subs(s,new)</p>
+<p>返回一个s的复制，代替在s中所有的默认变量出现为new，和计算s。默认变量是定义通过symvar.</p>
+</li>
+<li><p>sub(s)</p>
+<p>反回一个s的复制，代替在s中所有的符号变量。这些符号变量的值来自调用函数和MatLab工作空间，和计算s。没有赋值的值将会保持作为变量</p>
+<p><strong>Input Arguments</strong></p>
+</li>
+<li><p><strong>s – Input</strong></p>
+<p>symbolic variable | symbolic expression | symbolic equation | symbolic function | symbolic array | symbolic matrix</p>
+</li>
+<li><p><strong>old – Element to substitute</strong></p>
+<p>symbolic variable | symbolic expression | symbolic array</p>
+</li>
+<li><p><strong>new – New element</strong></p>
+<p>number | symbolic number | symbolic variable | symbolic expression | symbolic array | structure</p>
+<p><strong>Example</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fout</span> = <span class="title">Test</span><span class="params">(a,b,c)</span></span></span><br><span class="line"><span class="comment">%Describe Single Substitution</span></span><br><span class="line"><span class="comment">%Syntax subs(s,old,new)</span></span><br><span class="line">syms a b</span><br><span class="line">subs(a + b,a,<span class="number">4</span>) <span class="comment">%代替a为4并计算</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fout</span> = <span class="title">Test</span><span class="params">(a,b,c)</span></span></span><br><span class="line"><span class="comment">%Describe default Substitution variable</span></span><br><span class="line"><span class="comment">%Syntax subs(s,new)</span></span><br><span class="line">syms x y a</span><br><span class="line">symvar(x + y,<span class="number">1</span>); <span class="comment">%按字母顺序 x</span></span><br><span class="line">subs(x + y,a) <span class="comment">%根据上面默认变量，替换x为a</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%Describe update Expression with new value</span></span><br><span class="line"><span class="comment">%Syntax subs(s)</span></span><br><span class="line">syms a y(t)</span><br><span class="line">y = dsolve(diff(y) == -a*y)</span><br><span class="line">a = <span class="number">980</span>;</span><br><span class="line">C2 = <span class="number">3</span>;</span><br><span class="line">subs(y)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="solve-方程和系统求解器"><a href="#solve-方程和系统求解器" class="headerlink" title="solve - 方程和系统求解器"></a>solve - <a href="https://ww2.mathworks.cn/help/symbolic/solve.html?searchHighlight=solve&amp;s_tid=doc_srchtitle#bue6mwo-1" target="_blank" rel="noopener">方程和系统求解器</a></h3><p><strong>Syntax</strong></p>
+<ul>
+<li><p>S = solve(eqn,var)</p>
+<p>解方程变量通过方程 eqn，如果你并没有指定 var, symvar函数决定解变量。 </p>
+</li>
+<li><p>S = solve(eqn,var,Name,Value)</p>
+<p>solve(eqn,var,Name,Value) 使用一个或者多个Name,Vakue对参数指定额外的选择</p>
+</li>
+<li><p>Y = solve(eqns,vars)</p>
+<p>解指定变量 vars 通过系统方程 eqns和返回一个包含解的结构体。如果你并没有指定 vars,<strong>solve</strong>使用<strong>symvar</strong>来找到解变量。在这个案例中，<strong>symvar</strong>发现的变量数量等于方程 <strong>eqns</strong>的数量</p>
+</li>
+<li><p>[y1,…,yN] = solve(eqns,vars)</p>
+<p>解指定变量 vars 通过系统方程 eqns和这个解将会被赋值给变量y1,y2,y3…yN,<strong>solve</strong>使用<strong>symvar</strong>来找到解变量。在这个案例中，<strong>symvar</strong>发现的变量数量等于方程 <strong>eqns</strong>的数量</p>
+</li>
+<li><p>[y1,…,yN,parameters,conditions] = solve(eqns,vars,’ReturnConditions’,true)</p>
+<p>返回额外的参数自变量和指定解和此解的条件的参数</p>
+</li>
+</ul>
+<p><code>其他未写</code>:busts_in_silhouette:</p>
+<p><strong>Input  Arguments</strong></p>
+<ul>
+<li><p>eqn – Equation to solve</p>
+<p>symbolic expression | symbolic equation</p>
+</li>
+<li><p>var – Variable for which you solve equation</p>
+<p>symbolic variable</p>
+</li>
+</ul>
+<p><strong>Example</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fout</span> = <span class="title">Test</span><span class="params">(a,b,c)</span></span></span><br><span class="line"><span class="comment">%Describe Solve an equation</span></span><br><span class="line"><span class="comment">%Syntax solve(eqn,var)</span></span><br><span class="line">syms x</span><br><span class="line">eqn = <span class="built_in">sin</span>(x) == <span class="number">1</span>;</span><br><span class="line">solx = solve(eqn,x) <span class="comment">%pi/2，solve并不会返回一个无限集合，可以使用name value 设置，2014a不存在这个参数</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fout</span> = <span class="title">Test</span><span class="params">(a,b,c)</span></span></span><br><span class="line"><span class="comment">%Describe Return real solutions</span></span><br><span class="line"><span class="comment">%Syntax solve(eqn,var,Name,Value)</span></span><br><span class="line">syms x</span><br><span class="line">eqn = x^<span class="number">5</span> == <span class="number">3125</span>;</span><br><span class="line">solve(eqn,x); <span class="comment">%返回实数根和负数根</span></span><br><span class="line">solve(eqn,x,<span class="string">'Real'</span>,true) <span class="comment">%只返回实数根</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">S</span> = <span class="title">Test</span><span class="params">(a,b,c)</span></span></span><br><span class="line"><span class="comment">%Describe Solve Multivariate Equations and Assign Outputs to Structure</span></span><br><span class="line"><span class="comment">%Syntax solve(eqns,vars)</span></span><br><span class="line">syms u v</span><br><span class="line">eqns = [<span class="number">2</span>*u + v == <span class="number">0</span>,u - v == <span class="number">1</span>];</span><br><span class="line">S = solve(eqns,u,v); <span class="comment">%以结构体返回</span></span><br><span class="line">expr1 = u^<span class="number">2</span>;</span><br><span class="line">subs(expr1, S)   <span class="comment">%替换u通过已知值</span></span><br><span class="line">expr2 = <span class="number">3</span>*v+u;</span><br><span class="line">subs(expr2, S)   <span class="comment">%替换v通过已知值</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><strong>Other</strong></p>
+<p>图解法和<code>slove</code>和<code>fsolve</code>的比较</p>
+<p><a href="https://jingyan.baidu.com/article/a681b0de7f383f3b18434606.html" target="_blank" rel="noopener">点击</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/matlab/" rel="tag"># matlab</a>
+          
+            <a href="/tags/functions/" rel="tag"># functions</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/extension-什么是token.html" rel="next" title="token简单介绍">
+                <i class="fa fa-chevron-left"></i> token简单介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/algorithm-快速排序.html" rel="prev" title="快速排序">
+                快速排序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="XIAOHAO" />
+            
+              <p class="site-author-name" itemprop="name">XIAOHAO</p>
+              <p class="site-description motion-element" itemprop="description">EASY EASY GAME</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Nautilus-Nemo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:natiluswwnemo@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-globe"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-globe"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-globe"></i>YouTube</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Matlab函数功能记录"><span class="nav-number">1.</span> <span class="nav-text">Matlab函数功能记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#int"><span class="nav-number">1.1.</span> <span class="nav-text">int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plotfit"><span class="nav-number">1.2.</span> <span class="nav-text">plotfit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lsqcurvefit"><span class="nav-number">1.3.</span> <span class="nav-text">lsqcurvefit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fzero"><span class="nav-number">1.4.</span> <span class="nav-text">fzero</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#randn"><span class="nav-number">1.5.</span> <span class="nav-text">randn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#orth-Orthonormal-basis-for-range-of-matrix（矩阵值域的正交基）"><span class="nav-number">1.6.</span> <span class="nav-text">orth - Orthonormal basis for range of matrix（矩阵值域的正交基）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#logspace-Generate-logarithmically-spaced-vertors-生成对数间隔向量"><span class="nav-number">1.7.</span> <span class="nav-text">logspace - Generate logarithmically spaced vertors  生成对数间隔向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diag-Get-diagonal-elements-or-create-diagonal-matrix-获取对角线元素或创建对角矩阵"><span class="nav-number">1.8.</span> <span class="nav-text">diag -Get diagonal elements or create diagonal matrix 获取对角线元素或创建对角矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inv-Matrix-inverse-逆矩阵"><span class="nav-number">1.9.</span> <span class="nav-text">inv Matrix inverse(逆矩阵)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dsolve-Ordinary-differential-equation-and-system-solver"><span class="nav-number">1.10.</span> <span class="nav-text">dsolve -Ordinary differential equation and system solver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plot-2-D-line-plot"><span class="nav-number">1.11.</span> <span class="nav-text">plot - 2-D line plot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#magic-Magic-square"><span class="nav-number">1.12.</span> <span class="nav-text">magic - Magic square</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fplot"><span class="nav-number">1.13.</span> <span class="nav-text">fplot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compan-Companion-Matrix-伴随矩阵"><span class="nav-number">1.14.</span> <span class="nav-text">compan - Companion Matrix 伴随矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#surf-3-D-影表面画图-未看"><span class="nav-number">1.15.</span> <span class="nav-text">surf - 3-D 影表面画图 -未看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ppval-计算分段多项式"><span class="nav-number">1.16.</span> <span class="nav-text">ppval - 计算分段多项式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff-微分符号函数或者函数"><span class="nav-number">1.17.</span> <span class="nav-text">diff - 微分符号函数或者函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#symvar-在符号输入中发现符号变量"><span class="nav-number">1.18.</span> <span class="nav-text">symvar - 在符号输入中发现符号变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subs-符号代替"><span class="nav-number">1.19.</span> <span class="nav-text">subs - 符号代替</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#solve-方程和系统求解器"><span class="nav-number">1.20.</span> <span class="nav-text">solve - 方程和系统求解器</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XIAOHAO</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("5cF4jJXnHJjA0AwoeJJNOOXC-gzGzoHsz", "L9F4E01DGKT8abJFz8SBdS4m");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

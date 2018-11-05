@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="problem,solve," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Nautilu_Nemo" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="问题解决(1) 导入.jar文件可执行文件与eclipse需要重写遇到did not contain the main type的原因导入后实际为普通文件形式，不属于src文件，不能运行，*.jar里面的库重新build path导入，其它.java复制进去 其他可能造成的原因请看 (2) 未在jdk中找到javax.xml.blind（classnotFoundException)jdk9.0.">
+<meta name="keywords" content="problem,solve">
+<meta property="og:type" content="article">
+<meta property="og:title" content="问题解决">
+<meta property="og:url" content="http://log.xiaohaoming.com/2018/09/extension-问题解决.html">
+<meta property="og:site_name" content="Nautilu_Nemo">
+<meta property="og:description" content="问题解决(1) 导入.jar文件可执行文件与eclipse需要重写遇到did not contain the main type的原因导入后实际为普通文件形式，不属于src文件，不能运行，*.jar里面的库重新build path导入，其它.java复制进去 其他可能造成的原因请看 (2) 未在jdk中找到javax.xml.blind（classnotFoundException)jdk9.0.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://guolin.tech/api/bing_pic">
+<meta property="og:updated_time" content="2018-09-09T08:49:59.086Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="问题解决">
+<meta name="twitter:description" content="问题解决(1) 导入.jar文件可执行文件与eclipse需要重写遇到did not contain the main type的原因导入后实际为普通文件形式，不属于src文件，不能运行，*.jar里面的库重新build path导入，其它.java复制进去 其他可能造成的原因请看 (2) 未在jdk中找到javax.xml.blind（classnotFoundException)jdk9.0.">
+<meta name="twitter:image" content="http://guolin.tech/api/bing_pic">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://log.xiaohaoming.com/2018/09/extension-问题解决.html"/>
+
+
+
+
+
+  <title>问题解决 | Nautilu_Nemo</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?41fc030db57d5570dd22f78997dc4a7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Nautilu_Nemo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://log.xiaohaoming.com/2018/09/extension-问题解决.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XIAOHAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nautilu_Nemo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">问题解决</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-25T21:58:12+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/extension/" itemprop="url" rel="index">
+                    <span itemprop="name">extension</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/09/extension-问题解决.html" class="leancloud_visitors" data-flag-title="问题解决">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://guolin.tech/api/bing_pic" rel="gallery_cjo4cefpi002i8kthcqdb6iof"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://guolin.tech/api/bing_pic" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><h4 id="1-导入-jar文件可执行文件与eclipse需要重写遇到did-not-contain-the-main-type的原因"><a href="#1-导入-jar文件可执行文件与eclipse需要重写遇到did-not-contain-the-main-type的原因" class="headerlink" title="(1) 导入.jar文件可执行文件与eclipse需要重写遇到did not contain the main type的原因"></a>(1) 导入.jar文件可执行文件与eclipse需要重写遇到did not contain the main type的原因</h4><pre><code>导入后实际为普通文件形式，不属于src文件，不能运行，*.jar里面的库重新build path导入，其它.java复制进去
+</code></pre><p><a href="https://stackoverflow.com/questions/16225177/error-selection" target="_blank" rel="noopener">其他可能造成的原因请看</a></p>
+<h4 id="2-未在jdk中找到javax-xml-blind（classnotFoundException"><a href="#2-未在jdk中找到javax-xml-blind（classnotFoundException" class="headerlink" title="(2) 未在jdk中找到javax.xml.blind（classnotFoundException)"></a>(2) 未在jdk中找到javax.xml.blind（classnotFoundException)</h4><p><code>jdk9.0.1</code>已经抛弃<code>javax.xml.blind</code>包，从<a href="https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api/2.3.0" target="_blank" rel="noopener">maven</a>导入找到要导入的包及依赖库描述，建立一个maven项目artifact，在<code>pom.xml</code>中加入依赖<code>dependency</code><br><a href="https://stackoverflow.com/questions/43574426/how-to-resolve-java-lang-noclassdeffounderror-javax-xml-bind-jaxbexception-in-j/48136912#48136912" target="_blank" rel="noopener">具体参考</a></p>
+<h4 id="3-WARNING-An-illegal-reflective-access-operation-has-occurred"><a href="#3-WARNING-An-illegal-reflective-access-operation-has-occurred" class="headerlink" title="(3) WARNING: An illegal reflective access operation has occurred"></a>(3) WARNING: An illegal reflective access operation has occurred</h4><p><code>WARNING: Illegal reflective access by com.sun.xml.bind.v2.runtime.reflect.opt.Injector (file:/C:/Users/13612/.m2/repository/com/sun/xml/bind/jaxb-impl/2.3.0/jaxb-impl-2.3.0.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int)</code></p>
+<ul>
+<li>WARNING: Please consider reporting this to the   maintainercom.sun.xml.bind.v2.runtime.reflect.opt.Injector</li>
+<li>WARNING: Use –illegal-access=warn to enable warnings of further illegal reflective access operations</li>
+<li><p>WARNING: All illegal access operations will be denied in a future release<br><code>原因：jdk9加入的安全</code><br><code>解决方案</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>: <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	    	  <span class="comment">//屏蔽掉非法反射访问，JDK9</span></span><br><span class="line">	    	  StudentMessagHandler.disableWarning();<span class="comment">//主要这个语句</span></span><br><span class="line">	    	  StudentMessagHandler smh=<span class="keyword">new</span> StudentMessagHandler(</span><br><span class="line">	    	  <span class="string">"C:\\data\\（含预警1.0）大一、大二、大三通讯录\\"</span></span><br><span class="line">	    	  + <span class="string">"（含预警）大一、大二、大三通讯录\\学生通讯录\\16级\\160801.xlsx"</span>);</span><br><span class="line">	    	  <span class="keyword">for</span>(String str:smh.randomMacth(<span class="number">5</span>)) &#123;</span><br><span class="line">	    		System.out.println(str);</span><br><span class="line">	    	  &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p> <code>2: StackOverflow查找问题解决方案</code></p>
+</li>
+</ul>
+<h4 id="4-405-method-not-allowed"><a href="#4-405-method-not-allowed" class="headerlink" title="(4) 405 method not allowed"></a>(4) 405 method not allowed</h4><p><code>原因</code></p>
+<p><code>在尝试访问endpoint使用浏览器工具，然而，什么嘛时候打印资源URL在浏览器框，是正在执行request请求，这和是默认的因此，浏览器不能给你灵活的测试REST API，你只能执行GET请求。</code></p>
+<p><code>解决方案</code></p>
+<p><code>为了测试rest API，你应该使用正确的工具。有下列几种：CURL,PostMan等</code></p>
+<p><a href="https://stackoverflow.com/questions/35839547/how-to-perform-post-requests-to-a-rest-webservice" target="_blank" rel="noopener">具体请看</a></p>
+<h4 id="5-curl安装"><a href="#5-curl安装" class="headerlink" title="(5) curl安装"></a>(5) curl安装</h4><p>  <a href="https://curl.haxx.se/dlwiz/?type=bin&amp;os=Win64&amp;flav=-&amp;ver=*&amp;cpu=x86_64" target="_blank" rel="noopener">进入官网</a><br>  <a href="https://stackoverflow.com/questions/9507353/how-do-i-install-set-up-and-use-curl-on-windows" target="_blank" rel="noopener">具体请看</a></p>
+<h4 id="6-the-type-is-not-accessible"><a href="#6-the-type-is-not-accessible" class="headerlink" title="(6) the type** is not accessible"></a>(6) the type** is not accessible</h4><p>​    用<code>eclipse build path</code>导入<code>classpath or module path</code>存在，但通过以<code>Maven</code>形式导入，不存在这种问题<br>    深层封装问题，未解决。</p>
+<h4 id="7-实参和形参的区别"><a href="#7-实参和形参的区别" class="headerlink" title="(7) 实参和形参的区别"></a>(7) 实参和形参的区别</h4><p>请看<code>DeleteLinkedNodeFromTO（packet Algorithm）</code><br> <a href="https://blog.csdn.net/johnson_moon/article/details/54094655" target="_blank" rel="noopener">参考</a></p>
+<h4 id="8-Could-not-instantiate-TestExecutionListener"><a href="#8-Could-not-instantiate-TestExecutionListener" class="headerlink" title="(8) Could not instantiate TestExecutionListener"></a>(8) Could not instantiate TestExecutionListener</h4><p>Specify custom listener classes or make the default listener classes (and their required dependencies) available. Offending class: [javax/servlet/ServletContext]<br><code>原因</code><br><code>没有提供存在该包lib，如果没有使用web一些包，可以不需要管这个问题，这是默认的springTest实例的一些类</code><br><a href="https://stackoverflow.com/questions/26125024/could-not-instantiate-testexecutionlistener" target="_blank" rel="noopener">具体解决方案请看</a></p>
+<h4 id="9-java-lang-ClassNotFoundException-javax-xml-bind-JAXBException"><a href="#9-java-lang-ClassNotFoundException-javax-xml-bind-JAXBException" class="headerlink" title="(9) java.lang.ClassNotFoundException: javax.xml.bind.JAXBException"></a>(9) java.lang.ClassNotFoundException: javax.xml.bind.JAXBException</h4><p><code>原因</code><br><code>未发现这个javax.xml.bind/..包在发布web应用里面由于java9module配置移除了java ee包含的java/xml/bind/</code><br><code>解决方案</code><br><code>发布的web应用下面lib库中添加有关联的包</code><br><a href="https://blog.csdn.net/hadues/article/details/79188793" target="_blank" rel="noopener">具体解决方案</a></p>
+<h4 id="10-严重-Invalid-message-recieved-with-signature-18245"><a href="#10-严重-Invalid-message-recieved-with-signature-18245" class="headerlink" title="(10) 严重: Invalid message recieved with signature 18245"></a>(10) 严重: Invalid message recieved with signature 18245</h4><p> <code>原因</code></p>
+<p><code>这个提示是由于我用HTTP方式访问了8009端口，而8009端口是通过AJP访问的</code></p>
+<h4 id="11-关于mysql-Access-denied-for-user-root-localhos问题解答"><a href="#11-关于mysql-Access-denied-for-user-root-localhos问题解答" class="headerlink" title="(11) 关于mysql Access denied for user root@localhos问题解答"></a>(11) 关于mysql Access denied for user root@localhos问题解答</h4><p>  <code>原因</code><br>  <code>首次登录mysql密码未设置是遇到拒绝访问，权限检查不予许</code><br>  <code>解决方案</code></p>
+<ul>
+<li>如果未关闭MYSQL服务，关闭MYSQL服务 例：command line:net stop mysql;</li>
+<li>进入安装目录 $/my.ini配置文件，在[mysqld]条目下添加–skip-grant-tables，过着cmd命令 $mysqld-nt –skip-grant-tables，启动mysql，忽略权限检查</li>
+<li>在mysql命令行中，mysqladmin -u root flush-privileges password “newpassword” 重设root密码</li>
+<li>net start mysql 重新登录</li>
+</ul>
+<h4 id="12-关于phpmydmin管理界面不存在添加用户权限的原因解答"><a href="#12-关于phpmydmin管理界面不存在添加用户权限的原因解答" class="headerlink" title="(12) 关于phpmydmin管理界面不存在添加用户权限的原因解答"></a>(12) 关于phpmydmin管理界面不存在添加用户权限的原因解答</h4><p><code>原因</code><br><code>首次登录未设置密码权限不够导致.通过上面的解决方案，可以解决这个问题</code></p>
+<h4 id="13-C语言中标准输入的结束符-windows-CTRL-z，linux是Ctrl-d"><a href="#13-C语言中标准输入的结束符-windows-CTRL-z，linux是Ctrl-d" class="headerlink" title="(13) C语言中标准输入的结束符 windows CTRL+z，linux是Ctrl+d"></a>(13) C语言中标准输入的结束符 windows CTRL+z，linux是Ctrl+d</h4><h4 id="14-An-invalid-character-32-was-present-in-the-Cookie-value"><a href="#14-An-invalid-character-32-was-present-in-the-Cookie-value" class="headerlink" title="(14) An invalid character [32] was present in the Cookie value"></a>(14) An invalid character [32] was present in the Cookie value</h4><p>WEB16 lastAccessTimeServlet SimpleDateFormat format = new SimpleDateFormat(“yyyy-MM-dd hh:mm:ss”);<br><code>原因</code><br><code>an invalid character [32] was present in the Cookie value  中32对应的编码是空格</code><br><code>Stack Overflow上的回答：This is due to Tomcat&#39;s cookie processing being changed to a RFC 6265 compliant implementation by default in 8.5, which does not allow space (character 32), among others. 我的tomcat版本是9.0，发现WEB16 lastAccessTimeServlet SimpleDateFormat format = new SimpleDateFormat(&quot;yyyy-MM-dd hh:mm:ss&quot;)这行代码yyyy-MM-dd hh:mm:ss存在空格。</code></p>
+<p><code>解决方案</code><br><code>去除空格，问题解决</code><br><a href="https://blog.csdn.net/allan_liu_/article/details/74990162" target="_blank" rel="noopener">具体解决思路</a></p>
+<h4 id="15-android-can’t-resolve-R"><a href="#15-android-can’t-resolve-R" class="headerlink" title="(15) android:can’t resolve R"></a>(15) android:can’t resolve R</h4><p><code>原因</code><br><code>可能R文件无意删除或者其他因素</code><br><code>解决方法</code><br><code>build-&gt;rebuild(重新生成R文件)</code></p>
+<h4 id="16-github-There-isn’t-a-GitHub-Pages-site-here"><a href="#16-github-There-isn’t-a-GitHub-Pages-site-here" class="headerlink" title="(16) github There isn’t a GitHub Pages site here."></a>(16) github There isn’t a GitHub Pages site here.</h4><p>github page 绑定域名以后，在浏览器输入域名但是出现上面错误。<br><code>原因</code><br><code>域名已经成功解析到远程主机（github page），但是因为github page绑定域名需要一个特定文件CNAME（包含域名）才能定向到github，因为我并没有创建。</code>解决方法<code></code>创建一个特定的CNAME文件，在里面加入自己的域名`</p>
+<h4 id="17-java-net-UnknownHostException-Unable-to-resolve-host-“guolin-tech”-No-address-associated-with-hostname"><a href="#17-java-net-UnknownHostException-Unable-to-resolve-host-“guolin-tech”-No-address-associated-with-hostname" class="headerlink" title="(17) java.net.UnknownHostException: Unable to resolve host “guolin.tech”: No address associated with hostname"></a>(17) java.net.UnknownHostException: Unable to resolve host “guolin.tech”: No address associated with hostname</h4><p>在做第一行代码天气项目遇到问题<br><code>原因</code><br><code>安卓浏览器hostname不能够resolved，如果domain name没有附上的</code></p>
+<p><a href="https://stackoverflow.com/questions/8651043/android-browser-hostnames-does-not-get-resolved-if-domain-name-is-not-appended" target="_blank" rel="noopener">具体原因</a><br><code>解决方法</code><br><code>$ ping guolin.tech,替换host域名为ip地址，例子ip为：47.90.126.26</code></p>
+<h4 id="18-未能解决plugin-with-id-‘com-android-application’-not-found-待解决"><a href="#18-未能解决plugin-with-id-‘com-android-application’-not-found-待解决" class="headerlink" title="(18) 未能解决plugin with id ‘com.android.application’ not found$待解决"></a>(18) 未能解决plugin with id ‘com.android.application’ not found$待解决</h4><p><code>不是步骤 new--&gt;import project</code><br><code>而是步骤 new--&gt;import module</code></p>
+<h4 id="19-插入数据库类型Date值错误"><a href="#19-插入数据库类型Date值错误" class="headerlink" title="(19)插入数据库类型Date值错误"></a>(19)插入数据库类型Date值错误</h4><ul>
+<li>第一种情况:<br>Unknown column ‘2018-02-29’ in ‘field list’<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO product(pid,pname,market_price,shop_price,pimage,pdate,is_hot,pdesc,pflag,cid) VALUES(&quot;ghu2&quot;,&quot;12312&quot;,123.2,23.2,&quot;img/1.jpg&quot;,`2018-02-29`,0,&quot;des&quot;,0,&quot;www&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>原因</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`2018-02-29`应该使用&apos;2018-02-29&apos;,错误使用符号</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>第二种情况</p>
+<p>Incorrect date value: ‘2018-02-29’ for column ‘pdate’ at row 1</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO product(pid,pname,market_price,shop_price,pimage,pdate,is_hot,pdesc,pflag,cid) VALUES(&quot;ghu2&quot;,&quot;12312&quot;,123.2,23.2,&quot;img/1.jpg&quot;,&apos;2018-02-29&apos;,0,&quot;des&quot;,0,&quot;www&quot;);</span><br></pre></td></tr></table></figure>
+<p><code>原因</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;2018-02-29&apos; 2018年时平年，不存在29日...</span><br></pre></td></tr></table></figure>
+<p><code>正确答案</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO product(pid,pname,market_price,shop_price,pimage,pdate,is_hot,pdesc,pflag,cid) VALUES(&quot;ghu2&quot;,&quot;12312&quot;,123.2,23.2,&quot;img/1.jpg&quot;,&apos;1999-01-23&apos;,0,&quot;des&quot;,0,&quot;www&quot;);</span><br></pre></td></tr></table></figure>
+<h4 id="20-ClassNotFoundException异常"><a href="#20-ClassNotFoundException异常" class="headerlink" title="(20) ClassNotFoundException异常"></a>(20) ClassNotFoundException异常</h4><ul>
+<li><p>未导入特定<code>jar</code>包，可通过查看具体那个类的未导入声明来决定应该导入那个包</p>
+<p><code>egg</code><img src="C:\Users\13612\Desktop\classNotfoundcase.jpg" alt="classNotfoundcase"></p>
+</li>
+</ul>
+<p>即可以看出是属于javax/activation/DataSource类，然后通过Maven配置文件或者导入<code>jar</code>文件来解决</p>
+<p><a href="https://mvnrepository.com/artifact/javax.activation/activation/1.1" target="_blank" rel="noopener">Maven</a></p>
+<ul>
+<li>包已经导入，但是还是出现异常，可能情况查看自己是否是<code>JAVA WEB</code>应用，如果是的话，查看是否此包正确导入到<code>lib</code>库中</li>
+</ul>
+<h4 id="21-MYSQL-WARN-Establishing-SSL-connection-without-server’s-identity-verification-is-not-recommended"><a href="#21-MYSQL-WARN-Establishing-SSL-connection-without-server’s-identity-verification-is-not-recommended" class="headerlink" title="(21) MYSQL:WARN: Establishing SSL connection without server’s identity verification is not recommended."></a>(21) MYSQL:WARN: Establishing SSL connection without server’s identity verification is not recommended.</h4><p><a href="https://blog.csdn.net/u010429286/article/details/77750177" target="_blank" rel="noopener">问题解决</a></p>
+<h4 id="22"><a href="#22" class="headerlink" title="(22)"></a>(22)</h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/problem/" rel="tag"># problem</a>
+          
+            <a href="/tags/solve/" rel="tag"># solve</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/algorithm-模式匹配.html" rel="next" title="模式匹配">
+                <i class="fa fa-chevron-left"></i> 模式匹配
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/extension-什么是token.html" rel="prev" title="token简单介绍">
+                token简单介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="XIAOHAO" />
+            
+              <p class="site-author-name" itemprop="name">XIAOHAO</p>
+              <p class="site-description motion-element" itemprop="description">EASY EASY GAME</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Nautilus-Nemo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:natiluswwnemo@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-globe"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-globe"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-globe"></i>YouTube</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题解决"><span class="nav-number">1.</span> <span class="nav-text">问题解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-导入-jar文件可执行文件与eclipse需要重写遇到did-not-contain-the-main-type的原因"><span class="nav-number">1.1.</span> <span class="nav-text">(1) 导入.jar文件可执行文件与eclipse需要重写遇到did not contain the main type的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-未在jdk中找到javax-xml-blind（classnotFoundException"><span class="nav-number">1.2.</span> <span class="nav-text">(2) 未在jdk中找到javax.xml.blind（classnotFoundException)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-WARNING-An-illegal-reflective-access-operation-has-occurred"><span class="nav-number">1.3.</span> <span class="nav-text">(3) WARNING: An illegal reflective access operation has occurred</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-405-method-not-allowed"><span class="nav-number">1.4.</span> <span class="nav-text">(4) 405 method not allowed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-curl安装"><span class="nav-number">1.5.</span> <span class="nav-text">(5) curl安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-the-type-is-not-accessible"><span class="nav-number">1.6.</span> <span class="nav-text">(6) the type** is not accessible</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-实参和形参的区别"><span class="nav-number">1.7.</span> <span class="nav-text">(7) 实参和形参的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-Could-not-instantiate-TestExecutionListener"><span class="nav-number">1.8.</span> <span class="nav-text">(8) Could not instantiate TestExecutionListener</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-java-lang-ClassNotFoundException-javax-xml-bind-JAXBException"><span class="nav-number">1.9.</span> <span class="nav-text">(9) java.lang.ClassNotFoundException: javax.xml.bind.JAXBException</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-严重-Invalid-message-recieved-with-signature-18245"><span class="nav-number">1.10.</span> <span class="nav-text">(10) 严重: Invalid message recieved with signature 18245</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-关于mysql-Access-denied-for-user-root-localhos问题解答"><span class="nav-number">1.11.</span> <span class="nav-text">(11) 关于mysql Access denied for user root@localhos问题解答</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-关于phpmydmin管理界面不存在添加用户权限的原因解答"><span class="nav-number">1.12.</span> <span class="nav-text">(12) 关于phpmydmin管理界面不存在添加用户权限的原因解答</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-C语言中标准输入的结束符-windows-CTRL-z，linux是Ctrl-d"><span class="nav-number">1.13.</span> <span class="nav-text">(13) C语言中标准输入的结束符 windows CTRL+z，linux是Ctrl+d</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-An-invalid-character-32-was-present-in-the-Cookie-value"><span class="nav-number">1.14.</span> <span class="nav-text">(14) An invalid character [32] was present in the Cookie value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-android-can’t-resolve-R"><span class="nav-number">1.15.</span> <span class="nav-text">(15) android:can’t resolve R</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16-github-There-isn’t-a-GitHub-Pages-site-here"><span class="nav-number">1.16.</span> <span class="nav-text">(16) github There isn’t a GitHub Pages site here.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#17-java-net-UnknownHostException-Unable-to-resolve-host-“guolin-tech”-No-address-associated-with-hostname"><span class="nav-number">1.17.</span> <span class="nav-text">(17) java.net.UnknownHostException: Unable to resolve host “guolin.tech”: No address associated with hostname</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-未能解决plugin-with-id-‘com-android-application’-not-found-待解决"><span class="nav-number">1.18.</span> <span class="nav-text">(18) 未能解决plugin with id ‘com.android.application’ not found$待解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#19-插入数据库类型Date值错误"><span class="nav-number">1.19.</span> <span class="nav-text">(19)插入数据库类型Date值错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20-ClassNotFoundException异常"><span class="nav-number">1.20.</span> <span class="nav-text">(20) ClassNotFoundException异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#21-MYSQL-WARN-Establishing-SSL-connection-without-server’s-identity-verification-is-not-recommended"><span class="nav-number">1.21.</span> <span class="nav-text">(21) MYSQL:WARN: Establishing SSL connection without server’s identity verification is not recommended.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22"><span class="nav-number">1.22.</span> <span class="nav-text">(22)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XIAOHAO</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("5cF4jJXnHJjA0AwoeJJNOOXC-gzGzoHsz", "L9F4E01DGKT8abJFz8SBdS4m");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

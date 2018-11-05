@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="algorithm,method," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Nautilu_Nemo" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="###Interpolation - 插值 In the mathematical field of numerical analysis, interpolation is a method of constructing new data points within the range of a discrete set of known data points. ^8 Piecewise c">
+<meta name="keywords" content="algorithm,method">
+<meta property="og:type" content="article">
+<meta property="og:title" content="插值">
+<meta property="og:url" content="http://log.xiaohaoming.com/2018/09/algorithm-Interpolation-插值.html">
+<meta property="og:site_name" content="Nautilu_Nemo">
+<meta property="og:description" content="###Interpolation - 插值 In the mathematical field of numerical analysis, interpolation is a method of constructing new data points within the range of a discrete set of known data points. ^8 Piecewise c">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://cn.bing.com/az/hprichbg/rb/Gauchos_EN-US9437338004_1920x1080.jpg">
+<meta property="og:updated_time" content="2018-09-25T13:46:53.193Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="插值">
+<meta name="twitter:description" content="###Interpolation - 插值 In the mathematical field of numerical analysis, interpolation is a method of constructing new data points within the range of a discrete set of known data points. ^8 Piecewise c">
+<meta name="twitter:image" content="http://cn.bing.com/az/hprichbg/rb/Gauchos_EN-US9437338004_1920x1080.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://log.xiaohaoming.com/2018/09/algorithm-Interpolation-插值.html"/>
+
+
+
+
+
+  <title>插值 | Nautilu_Nemo</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?41fc030db57d5570dd22f78997dc4a7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Nautilu_Nemo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://log.xiaohaoming.com/2018/09/algorithm-Interpolation-插值.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XIAOHAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nautilu_Nemo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">插值</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-25T21:46:58+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/09/algorithm-Interpolation-插值.html" class="leancloud_visitors" data-flag-title="插值">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://cn.bing.com/az/hprichbg/rb/Gauchos_EN-US9437338004_1920x1080.jpg" rel="gallery_cjo4cefpd002b8kthibejlfra"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://cn.bing.com/az/hprichbg/rb/Gauchos_EN-US9437338004_1920x1080.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>###Interpolation - 插值</p>
+<p>In the <a href="https://en.wikipedia.org/wiki/Mathematics" target="_blank" rel="noopener">mathematical</a> field of <a href="https://en.wikipedia.org/wiki/Numerical_analysis" target="_blank" rel="noopener">numerical analysis</a>, <strong>interpolation</strong> is a method of constructing new <a href="https://en.wikipedia.org/wiki/Data_points" target="_blank" rel="noopener">data points</a> within the range of a <a href="https://en.wikipedia.org/wiki/Discrete_set" target="_blank" rel="noopener">discrete set</a> of known data points. <a href="在数值分析数学领域，插值是在已知的数据点的实体集合范围内构造新的数据点方法">^8</a></p>
+<h4 id="Piecewise-constant-interpolation-分段常量插值"><a href="#Piecewise-constant-interpolation-分段常量插值" class="headerlink" title="Piecewise constant interpolation - 分段常量插值"></a>Piecewise constant interpolation - 分段常量插值</h4><p>Further information: <a href="https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation" target="_blank" rel="noopener">Nearest-neighbor interpolation</a></p>
+<p>The simplest interpolation method is to locate the nearest data value, and assign the same value. <a href="最简单的插值方法是插入已知数据值最接近的数据值，和赋相同的值">^9</a></p>
+<h4 id="Linear-interpolation-线性插值"><a href="#Linear-interpolation-线性插值" class="headerlink" title="Linear interpolation - 线性插值"></a><a href="https://en.wikipedia.org/wiki/Linear_interpolation" target="_blank" rel="noopener">Linear interpolation </a>- 线性插值</h4><p>One of the simplest method is linear interpolation.<a href="线性插值是其中一个比较简单的方法">^10</a></p>
+<p>Generally,linear interpolation takes two data points,say$$(x_a,y_a)$$,and the interpolation is given by:</p>
+<p>$$y = y_a + (y_b -y_a) \frac{x-x_a}{x_b - x_a}$$ at the point $$(x,y)$$  </p>
+<p>Then the linear interpolation error is </p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/15e835bf7d5d64ca8fef6bd55cfd937460b4752e" alt="|f(x)-g(x)|\leq C(x_{b}-x_{a})^{2}\quad {\text{where}}\quad C={\frac {1}{8}}\max _{r\in [x_{a},x_{b}]}|g&#39;&#39;(r)|."> </p>
+<h4 id="Polynomial-interpolation-多项式插值"><a href="#Polynomial-interpolation-多项式插值" class="headerlink" title="Polynomial interpolation - 多项式插值"></a><a href="https://en.wikipedia.org/wiki/Polynomial_interpolation" target="_blank" rel="noopener">Polynomial interpolation </a>- 多项式插值</h4><p>Polynomial interpolation is generalization of linear interpolation.<a href="多项式插值是线性插值的综合">^11</a>Note that the linear interpolation is a linear function. <a href="注意线性插值是一个线性函数">^12</a>We replace this interpolation with polynominal of higher degree. <a href="我们使用高次的多项式替换插值">^13</a></p>
+<p>Calculating the interpolating polynomial is computationally expensive (see <a href="https://en.wikipedia.org/wiki/Computational_complexity_theory" target="_blank" rel="noopener">computational complexity</a>) compared to linear interpolation. [^14]Furthermore, polynomial interpolation may exhibit oscillatory artifacts, especially at the end points (see <a href="https://en.wikipedia.org/wiki/Runge%27s_phenomenon" target="_blank" rel="noopener">Runge’s phenomenon</a>). [^15]</p>
+<h4 id="Spline-interpolatio-样条插值"><a href="#Spline-interpolatio-样条插值" class="headerlink" title="Spline interpolatio - 样条插值"></a><a href="https://en.wikipedia.org/wiki/Spline_interpolation" target="_blank" rel="noopener">Spline interpolatio</a> - 样条插值</h4><p>Remember that linear interpolation uses a linear function for each of intervals [$$x_k,x_{k+1}$$] .[^16]Spline interpolation uses low-degree polynominals in each of the intervals,and choose the polynominal piece such that fit smoothly together.[^17]The resulting function is called a spline. [^18]</p>
+<p>However, the global nature of the basis functions leads to ill-conditioning. This is completely mitigated <code>减弱</code> by using splines of compact support, such as are implemented in <a href="https://en.wikipedia.org/wiki/Interpolation#cite" target="_blank" rel="noopener">Boost.Math and discussed in Kress</a></p>
+<h4 id="Via-Gaussian-processes-使用高斯处理"><a href="#Via-Gaussian-processes-使用高斯处理" class="headerlink" title="Via Gaussian processes - 使用高斯处理"></a>Via Gaussian processes - 使用高斯处理</h4><p><a href="https://en.wikipedia.org/wiki/Gaussian_process" target="_blank" rel="noopener">Gaussian process</a> is a powerful non-linear interpolation tool. Many popular interpolation tools are actually equivalent to particular Gaussian processes.[^19]</p>
+<h4 id="Other-forms-其他解决插值方法组合"><a href="#Other-forms-其他解决插值方法组合" class="headerlink" title="Other forms - 其他解决插值方法组合"></a>Other forms - 其他解决插值方法组合</h4><p>Other forms of interpolation can be constructed by picking a different class of interpolations.[^20]</p>
+<h4 id="In-higher-dimensions-高纬度插值使用"><a href="#In-higher-dimensions-高纬度插值使用" class="headerlink" title="In higher dimensions - 高纬度插值使用"></a><a href="https://en.wikipedia.org/wiki/Multivariate_interpolation" target="_blank" rel="noopener">In higher dimensions</a> - 高纬度插值使用</h4><p>Multivariate interpolation is the interpolation of functions of more than one variable. [^21]</p>
+<h4 id="Related-concepts-相关概念"><a href="#Related-concepts-相关概念" class="headerlink" title="Related concepts - 相关概念"></a>Related concepts - 相关概念</h4><p>The term <em>extrapolation</em> is used to find data points outside the range of known data points. </p>
+<p><strong>插值与曲线拟合不同</strong></p>
+<p>In <a href="https://en.wikipedia.org/wiki/Curve_fitting" target="_blank" rel="noopener">curve fitting</a> problems, the constraint that the interpolant has to go exactly through the data points is relaxed.  </p>
+<p><a href="https://en.wikipedia.org/wiki/Approximation_theory" target="_blank" rel="noopener">Approximation theory</a> studies how to find the best approximation to a given function by another function from some predetermined class, and how good this approximation is. This clearly yields a bound on how well the interpolant can approximate the unknown function.</p>
+<h4 id="Extension-拓展"><a href="#Extension-拓展" class="headerlink" title="Extension - 拓展"></a>Extension - 拓展</h4><h5 id="rational-functions"><a href="#rational-functions" class="headerlink" title="rational functions"></a><a href="https://en.wikipedia.org/wiki/Rational_function" target="_blank" rel="noopener">rational functions</a></h5><p>rational [‘ræʃ(ə)nəl]<br>n adj: 理性,有理数</p>
+<p>In mathmatics, a rational function is any function which can be defined by a rational fraction.<a href="在数学上，一个有理数函数是能被有理分式定义任何函数">^1</a>i.e. an algebraic  fraction such that the numerator  and the denominator are polynominals.<a href="即代数分式，即分子和分母是多项式">^2</a>The coefficients of the polynominals need not be rational numbers;<a href="多项式系数需要不是有理数的数字">^3</a>They can be taken in any field K.<a href="它们可以被包含在任意领域K">^4</a>In this case, one speaks of a rational function and a rational function over K.[^5]The values of the variables may be taken in any field L containing K.<a href="变量的值可能被包含在包含K任意领域L">^6</a>Then the function is the set of the value of the variables for which the denominator is not zero and the codomain is L.<a href="那么这个函数是分母不为0的变量的值的集合和[陪域]()https://baike.baidu.com/item/陪域/942697是L">^7</a></p>
+<h4 id="MatLab实现插值"><a href="#MatLab实现插值" class="headerlink" title="MatLab实现插值"></a>MatLab实现插值</h4><h5 id="griddedInterpolant函数"><a href="#griddedInterpolant函数" class="headerlink" title="griddedInterpolant函数"></a><a href="https://ww2.mathworks.cn/help/matlab/ref/griddedinterpolant.html?lang=en" target="_blank" rel="noopener">griddedInterpolant</a>函数</h5><ul>
+<li><p><strong>Description</strong></p>
+<p>使用<code>griddedInterpolant</code>来执行1-D,2-D,3-D,or N-D 栅格数据集插值。<code>griddedInterpolant</code>返回插值<strong>F</strong>从被给予的数据集.能够在查询点集合测量<strong>F</strong></p>
+<p>使用<a href="https://ww2.mathworks.cn/help/matlab/ref/scatteredinterpolant.html" target="_blank" rel="noopener">scatteredInterpolant</a>来执行对于离散数据<code>scattered data</code>的插值</p>
+</li>
+<li><p><strong>Syntax</strong></p>
+<p><code>F = griddedInterpolant</code></p>
+<p><code>F = griddedInterpolant(x,v)</code> </p>
+<p>创造一个1-D插值通过样本点集矢量<code>vertor</code>x和符合值v.   </p>
+<p><code>F = griddedInterpolant(X1,X2,...,Xn,V)</code> ，</p>
+<p><code>F = griddedInterpolant(V)</code></p>
+<p>使用默认网格创造插值。当你在使用这个语法时候<code>griddedInterpolant</code>定义在第ith 维空间是1和范围是[1,size(V,i)]网格作为一个点集合。使用这个语法在你不需要关注内存和点之间绝对距离</p>
+<p><code>F = griddedInterpolant(gridVecs,V)</code></p>
+<p>指定包含n个grid vectors[^gird_vec]的描述n维样本网格cell数组gridvecs。使用这个语法当你需要使用指定的网格和关心内存</p>
+<p><code>F = griddedInterpolant(___,Method)</code></p>
+<p><code>F = griddedInterpolant(___,Method,ExtrapolationMethod)</code></p>
+<p>指定 both the interpolation and extrapolation methods. <code>griddedInterpolant</code> uses <code>ExtrapolationMethod</code> to estimate the value when your query points fall outside the domain of your sample point</p>
+</li>
+<li><p><strong>example</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ F ]</span> = <span class="title">Test_Interpolation</span><span class="params">(  )</span></span></span><br><span class="line"><span class="comment">%TEST 任何需要测试的例子</span></span><br><span class="line"><span class="comment">%   1-D Interpolation，使用默认‘linear’插值</span></span><br><span class="line"><span class="comment">%   Syntax F = griddedInterpolant(x,v) </span></span><br><span class="line">x = sort(<span class="number">20</span> * <span class="built_in">rand</span>(<span class="number">100</span>,<span class="number">1</span>));  <span class="comment">%介于0-20的100个随机数</span></span><br><span class="line">v = <span class="built_in">besselj</span>(<span class="number">0</span>,x);  <span class="comment">%一个函数</span></span><br><span class="line">F = griddedInterpolant(x,v);  <span class="comment">%创造一个网格插值对象，默认使用'linear' 插值方法</span></span><br><span class="line">xq = <span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">20</span>,<span class="number">500</span>);  <span class="comment">%插入500个统一距离的介于0-20的值</span></span><br><span class="line">vq = F(xq);</span><br><span class="line">plot(x,v,<span class="string">'ro'</span>)</span><br><span class="line">hold on  <span class="comment">%当需要多次使用plot且图像需要叠加时</span></span><br><span class="line">plot(xq,vq,<span class="string">'.'</span>)</span><br><span class="line">legend(<span class="string">'Sample points'</span>,<span class="string">'Interpolated Values'</span>)</span><br><span class="line">hold off <span class="comment">%终止接下来的需要plot图像叠加,则下一次plot在另外一个窗口打开</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ F ]</span> = <span class="title">Test_Interpolation</span><span class="params">(  )</span></span></span><br><span class="line"><span class="comment">%TEST 任何需要测试的例子</span></span><br><span class="line"><span class="comment">%Describe  Using Full Grid </span></span><br><span class="line"><span class="comment">%Syntax F = griddedInterpolant(gridVecs,V)</span></span><br><span class="line"><span class="comment">%Vq = F(Xq1,Xq2,...,Xqn,V) 相对于F(&#123;xgq1,xgq2,...,xgqn&#125;,V)</span></span><br><span class="line">x = (<span class="number">1</span>:<span class="number">0.3</span>:<span class="number">5</span>)';  <span class="comment">%行向量转置</span></span><br><span class="line">y = x';</span><br><span class="line">V = <span class="built_in">cos</span>(x) * <span class="built_in">sin</span>(y);</span><br><span class="line">n = <span class="built_in">length</span>(x);</span><br><span class="line"><span class="comment">%surf(1:n,1:n,V)  %未插值，画3-D表面，一一对应(x,y,z)</span></span><br><span class="line">F = griddedInterpolant(V);</span><br><span class="line">[xq,yq] = <span class="built_in">ndgrid</span>(<span class="number">1</span>:<span class="number">0.2</span>:n);  <span class="comment">%当存储无较大关系</span></span><br><span class="line">Vq = F(xq,yq);</span><br><span class="line">surf(xq',yq',Vq)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Input Argument</strong></p>
+<p><code>x</code> — Sample points vector</p>
+<p><strong>Data Types:</strong> <code>single</code> | <code>double</code></p>
+<p><code>v</code> — Sample values vector</p>
+<p><strong>Data Types:</strong> <code>single</code> | <code>double</code></p>
+<p><code>X1</code>, <code>X2</code>, <code>Xn</code> — Sample points in full grid form arrays </p>
+<p><strong>Data Types:</strong> <code>single</code> | <code>double</code></p>
+<p><code>gridVecs</code> — Sample points in grid vector form cell array of grid vectors</p>
+<p>当你网格是非常大的时候，使用这个形式作为一个和完整网格交替的形式</p>
+<blockquote>
+<p><code>Vq = F({xgq1,xgq2,...,xgqn})</code> specifies the query points as <a href="https://ww2.mathworks.cn/help/matlab/ref/griddedinterpolant.html#bvh2f0p-5" target="_blank" rel="noopener">grid vectors</a>. Use this syntax to conserve memory when you want to query a large grid of points.</p>
+<p><code>Vq = F(Xq1,Xq2,...,Xqn)</code> specifies the query points using the <code>n</code>-dimensional arrays <code>Xq1,Xq2,...,Xqn</code>, which define a <a href="https://ww2.mathworks.cn/help/matlab/ref/griddedinterpolant.html#bvh2f0p-4" target="_blank" rel="noopener">full grid</a> of points.</p>
+</blockquote>
+<p><strong>Data Types:</strong> <code>single</code> | <code>double</code></p>
+<p><code>V</code> — Sample values array</p>
+<p><strong>Data Types:</strong> <code>single</code> | <code>double</code></p>
+<p><code>Method</code> — Interpolation method <code>&#39;linear&#39;</code> (default) | <code>&#39;nearest&#39;</code> | <code>&#39;next&#39;</code> | <code>&#39;previous&#39;</code> | <code>&#39;pchip&#39;</code> | <code>&#39;cubic&#39;</code> | <code>&#39;spline&#39;</code> | <code>&#39;makima&#39;</code></p>
+<p><code>ExtrapolationMethod</code> — Extrapolation method <code>&#39;linear&#39;</code> (default) | <code>&#39;nearest&#39;</code> | <code>&#39;next&#39;</code> | <code>&#39;previous&#39;</code> | <code>&#39;pchip&#39;</code> | <code>&#39;cubic&#39;</code> | <code>&#39;spline&#39;</code> | <code>&#39;makima&#39;</code> | <code>&#39;none&#39;</code></p>
+<p>具体method代表意义，请参考手册，</p>
+</li>
+<li><p><strong>Properties</strong><br>类似于成员变量<br><code>GridVectors</code> — Grid vectors  cell array</p>
+</li>
+</ul>
+<p>​       <code>Values</code> — Function values at sample points  array</p>
+<p>​      <code>Method</code> — Interpolation method  <code>&#39;linear&#39;</code> (default) | <code>&#39;nearest&#39;</code> | <code>&#39;next&#39;</code> | <code>&#39;previous&#39;</code> | <code>&#39;pchip&#39;</code>        | <code>&#39;cubic&#39;</code> | <code>&#39;spline&#39;</code> | <code>&#39;makima&#39;</code></p>
+<p>​     <code>ExtrapolationMethod</code> — Extrapolation method  <code>&#39;linear&#39;</code> | <code>&#39;nearest&#39;</code> | <code>&#39;next&#39;</code> | <code>&#39;previous&#39;</code> | <code>&#39;pchip&#39;</code> | <code>&#39;cubic&#39;</code> | <code>&#39;spline&#39;</code> | <code>&#39;makima&#39;</code> | <code>&#39;none&#39;</code></p>
+<h5 id="interp1函数"><a href="#interp1函数" class="headerlink" title="interp1函数"></a><a href="https://ww2.mathworks.cn/help/matlab/ref/interp1.html?lang=en" target="_blank" rel="noopener">interp1函数</a></h5><p><a href="https://ww2.mathworks.cn/help/matlab/ref/griddedinterpolant.html?searchHighlight=griddedInterpolant&amp;s_tid=doc_srchtitle" target="_blank" rel="noopener">参考</a></p>
+<p>这个函数能够通过插值生成具体函数表达式</p>
+<p> 参考 pp = interp1(x,v,method,’pp’) 描述</p>
+<p>[^14]: 计算插值多项式是计算昂贵的【计算复杂度 】<a href="https://en.wikipedia.org/wiki/Computational_complexity_theory" target="_blank" rel="noopener">computational complexity</a> 相比线性插值<br>[^15]: 更多的是，多项式插值可能会展现oscillatory[震荡] artifacts，特别在末尾的点 see <a href="https://en.wikipedia.org/wiki/Runge%27s_phenomenon" target="_blank" rel="noopener">Runge’s phenomenon</a><br>[^16]: 记住线性插值在每个$$[x_k,x_{k+1}]$$使用线性函数<br>[^17]: 样条插值在每一个区间内使用低次多项式，和使用能够光滑的拟合在一起多项式段<br>[^18]: 这个结果函数被叫做样条<br>[^19]: 高斯处理是一个强大的非线性插值工具。许多普遍化插值工具实际上是类似于特殊的高斯处理<br>[^20]: 其他的插值格式能够被构造通过选择不同的插值类<br>[^21]: Multivariate interpolation是超过一个变量的插值函数</p>
+<p>参考引用：</p>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Interpolation" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Interpolation</a></li>
+</ol>
+<p>[^gird_vec]: 一个服务作为表示(compact representation)ndgrid格式的网格矢量集合。 例如:[X,Y] = ndgrid(xg,yg)返回一个完整的网格矩阵X和Y.能够通过使用网格矢量xg和yg表示相同网格。意义是后者能比前者节省内存.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+            <a href="/tags/method/" rel="tag"># method</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/algorithm-kTree.html" rel="next" title="给定结点求距离K其它结点">
+                <i class="fa fa-chevron-left"></i> 给定结点求距离K其它结点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/api-JAction-API-Interface.html" rel="prev" title="JAction">
+                JAction <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="XIAOHAO" />
+            
+              <p class="site-author-name" itemprop="name">XIAOHAO</p>
+              <p class="site-description motion-element" itemprop="description">EASY EASY GAME</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Nautilus-Nemo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:natiluswwnemo@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-globe"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-globe"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-globe"></i>YouTube</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Piecewise-constant-interpolation-分段常量插值"><span class="nav-number">1.</span> <span class="nav-text">Piecewise constant interpolation - 分段常量插值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linear-interpolation-线性插值"><span class="nav-number">2.</span> <span class="nav-text">Linear interpolation - 线性插值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Polynomial-interpolation-多项式插值"><span class="nav-number">3.</span> <span class="nav-text">Polynomial interpolation - 多项式插值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spline-interpolatio-样条插值"><span class="nav-number">4.</span> <span class="nav-text">Spline interpolatio - 样条插值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Via-Gaussian-processes-使用高斯处理"><span class="nav-number">5.</span> <span class="nav-text">Via Gaussian processes - 使用高斯处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Other-forms-其他解决插值方法组合"><span class="nav-number">6.</span> <span class="nav-text">Other forms - 其他解决插值方法组合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#In-higher-dimensions-高纬度插值使用"><span class="nav-number">7.</span> <span class="nav-text">In higher dimensions - 高纬度插值使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Related-concepts-相关概念"><span class="nav-number">8.</span> <span class="nav-text">Related concepts - 相关概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Extension-拓展"><span class="nav-number">9.</span> <span class="nav-text">Extension - 拓展</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#rational-functions"><span class="nav-number">9.1.</span> <span class="nav-text">rational functions</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MatLab实现插值"><span class="nav-number">10.</span> <span class="nav-text">MatLab实现插值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#griddedInterpolant函数"><span class="nav-number">10.1.</span> <span class="nav-text">griddedInterpolant函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#interp1函数"><span class="nav-number">10.2.</span> <span class="nav-text">interp1函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XIAOHAO</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("5cF4jJXnHJjA0AwoeJJNOOXC-gzGzoHsz", "L9F4E01DGKT8abJFz8SBdS4m");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

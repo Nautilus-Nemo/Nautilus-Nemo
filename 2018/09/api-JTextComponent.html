@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="api,java," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Nautilu_Nemo" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="JTextComponentdescendants 子孙,后代 JTextComponent类是Swing位文本模块基础。这个类为它的所有子孙后代提供下述习惯化特征  model，也叫做document，管理组件内容 view，在屏幕上展示组件 controller，也叫做editor kit，阅读和写文本和实现actions编辑兼容 插件式光标caret和支持光标改变监听器和导航过滤器  关于D">
+<meta name="keywords" content="api,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文本组件">
+<meta property="og:url" content="http://log.xiaohaoming.com/2018/09/api-JTextComponent.html">
+<meta property="og:site_name" content="Nautilu_Nemo">
+<meta property="og:description" content="JTextComponentdescendants 子孙,后代 JTextComponent类是Swing位文本模块基础。这个类为它的所有子孙后代提供下述习惯化特征  model，也叫做document，管理组件内容 view，在屏幕上展示组件 controller，也叫做editor kit，阅读和写文本和实现actions编辑兼容 插件式光标caret和支持光标改变监听器和导航过滤器  关于D">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://cn.bing.com/az/hprichbg/rb/Gauchos_EN-US9437338004_1920x1080.jpg">
+<meta property="og:updated_time" content="2018-09-25T13:51:21.643Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文本组件">
+<meta name="twitter:description" content="JTextComponentdescendants 子孙,后代 JTextComponent类是Swing位文本模块基础。这个类为它的所有子孙后代提供下述习惯化特征  model，也叫做document，管理组件内容 view，在屏幕上展示组件 controller，也叫做editor kit，阅读和写文本和实现actions编辑兼容 插件式光标caret和支持光标改变监听器和导航过滤器  关于D">
+<meta name="twitter:image" content="http://cn.bing.com/az/hprichbg/rb/Gauchos_EN-US9437338004_1920x1080.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://log.xiaohaoming.com/2018/09/api-JTextComponent.html"/>
+
+
+
+
+
+  <title>文本组件 | Nautilu_Nemo</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?41fc030db57d5570dd22f78997dc4a7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Nautilu_Nemo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://log.xiaohaoming.com/2018/09/api-JTextComponent.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XIAOHAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nautilu_Nemo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文本组件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-25T21:51:24+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/api/" itemprop="url" rel="index">
+                    <span itemprop="name">api</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/09/api-JTextComponent.html" class="leancloud_visitors" data-flag-title="文本组件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://cn.bing.com/az/hprichbg/rb/Gauchos_EN-US9437338004_1920x1080.jpg" rel="gallery_cjo4cefpk002l8kth0explafc"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://cn.bing.com/az/hprichbg/rb/Gauchos_EN-US9437338004_1920x1080.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h3 id="JTextComponent"><a href="#JTextComponent" class="headerlink" title="JTextComponent"></a><a href="https://docs.oracle.com/javase/tutorial/uiswing/components/generaltext.html" target="_blank" rel="noopener">JTextComponent</a></h3><p><strong>descendants</strong> <code>子孙,后代</code></p>
+<p><strong>JTextComponent</strong>类是<strong>Swing</strong>位文本模块基础。这个类为它的所有子孙后代提供下述习惯化特征</p>
+<ul>
+<li><strong>model</strong>，也叫做<strong>document</strong>，管理组件内容</li>
+<li><strong>view</strong>，在屏幕上展示组件</li>
+<li><strong>controller</strong>，也叫做<strong>editor kit</strong>，阅读和写文本和实现<strong>actions</strong>编辑兼容</li>
+<li><strong>插件式光标</strong><code>caret</code>和支持光标改变监听器和导航过滤器</li>
+</ul>
+<h4 id="关于Documents"><a href="#关于Documents" class="headerlink" title="关于Documents"></a>关于Documents</h4><p>文本组件是<strong>Model</strong>和<strong>View</strong>分离，可以查看<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/model.html" target="_blank" rel="noopener">Using Models</a>参考</p>
+<p>文本组件<strong>Model</strong>是被叫做<strong>document</strong>和实现了<strong>Document</strong>接口的实例。一个<strong>document</strong>为文本组件提供下述服务。</p>
+<ul>
+<li><strong>document</strong>在<strong>Element</strong>对象储存文本内容。</li>
+<li>通过<strong>remove</strong>和<strong>insertString</strong>方法提供编辑文本支持</li>
+<li>通知文本监听器和撤销编辑监听器关于文本的改变</li>
+<li>管理追踪在文本中即使被修改了的特殊的位置的<strong>Position</strong>对象</li>
+<li>承诺你获得文本信息</li>
+</ul>
+<p><strong>Swing</strong>包含<strong>Document</strong>子接口<code>eg:StyledDocumentd等</code>。一般<code>JTextComponent</code>子类默认请求<strong>StyledDocument</strong></p>
+<p>详情请看<strong>document</strong>类<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/generaltext.html#bindingkeystrokes" target="_blank" rel="noopener">继承关系</a></p>
+<p>如果你使用<strong>setPage</strong>方法来加载文本到<strong>editor</strong>板或者<strong>text板</strong>，<strong>document</strong>实例被<strong>pane</strong>使用可能会改变。请看<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/editorpane.html" target="_blank" rel="noopener">How to Use Editor Panes and Text Panes</a></p>
+<p>你能通过安装一个<strong>document filter</strong>或者代替文本组件的<strong>document</strong>来实现你自己习惯化的事物。<code>eg:使用document filter来改变如何文本组件数据被设置</code></p>
+<p>查看简单的<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/generaltext.html#bindingkeystrokes" target="_blank" rel="noopener">Implementing a Document Filter</a>代码片段</p>
+<h4 id="关于Editor-Kits"><a href="#关于Editor-Kits" class="headerlink" title="关于Editor Kits"></a>关于Editor Kits</h4><p>文本组件使用<strong>EditorKit</strong>来绑定不同片段的文本组件。<strong>EditorKit</strong>提供<strong>view factory</strong>,<strong>document</strong>,<strong>caret</strong>,<strong>actions</strong>。一个<strong>editor kit</strong>也阅读和写特殊格式的<strong>document</strong>。所有的文本组件使用<strong>editor kit</strong>，<strong>Editor panes</strong>和<strong>text panes</strong>提供<strong>getEditorKit</strong>方法获得目前<strong>Editor kit</strong>和<strong>setEditorKit</strong>方法来改变它。</p>
+<p><strong>JTextComponent</strong>类提供<strong>API</strong>帮助你直接调用或者习惯化一些<strong>Editor kit</strong>能力。例如，<strong>JTextComponent</strong>提供调用<strong>editor kit</strong>的<strong>read</strong>和<strong>write</strong>的<strong>read</strong>和<strong>write</strong>的方法；也是提供返回所有被该组件支持的<strong>actions</strong>通过<strong>getActions</strong>.</p>
+<p><strong>Swing</strong>文本包提供下述的<strong>editor kits</strong></p>
+<p><strong>DefaultEditorKit</strong></p>
+<p><strong>StyledEditorKit</strong></p>
+<p><strong>HtmlEditorKit</strong></p>
+<p>每一个<strong>editor kit</strong>列举在上面的已经被<strong>JEditorPane</strong>注册和联系<strong>kit</strong>阅读,写和编辑的文本格式。当一个文件被加载到<strong>EditorPane</strong>，这个板依靠注册<strong>kit</strong>检查文件格式。如果注册<strong>kit</strong>是发现支持这个文件格式，<strong>pane</strong>使用这个<strong>kit</strong>来阅读文件，展示和编辑它。那么，<strong>editor pane</strong>有效率的转换它自己到符合文本格式的<strong>editor</strong>。</p>
+<p><strong>你能够继承JEditorPane</strong>来支持你自己文本格式通过为它创造一个<strong>editor kit</strong>，和使用<code>JEditorPane</code>‘s <code>registerEditorKitForContentType</code> 来联系你的文本格式的<strong>kit</strong></p>
+<h4 id="TextComponentDemo"><a href="#TextComponentDemo" class="headerlink" title="TextComponentDemo"></a><a href="https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html" target="_blank" rel="noopener">TextComponentDemo</a></h4><p><a href="https://docs.oracle.com/javase/tutorial/uiswing/components/generaltext.html#bindingkeystrokes" target="_blank" rel="noopener">联系文本组件例子扩展的知识点</a></p>
+<h5 id="Associating-Text-Actions-with-menus-and-Buttons"><a href="#Associating-Text-Actions-with-menus-and-Buttons" class="headerlink" title="Associating Text Actions with menus and Buttons"></a><strong>Associating Text Actions with menus and Buttons</strong></h5><p>所有的文本组件支持标准得编辑命令，例如 <strong>Cut,Paste,Insert</strong>字符命令。每个编辑命令是通过<strong>Action</strong>对象表示和实现。学习更多关于<a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/action.html" target="_blank" rel="noopener">Actions</a>。<strong>Actions</strong>承诺联系命令和<strong>GUI</strong>组件，例如菜单项和按钮。</p>
+<ol>
+<li><p>上述<strong>Action</strong>的名字来自于<a href="https://docs.oracle.com/javase/8/docs/api/javax/swing/text/DefaultEditorKit.html" target="_blank" rel="noopener"><strong>DefaultEditorKit</strong></a>。这个<strong>kit</strong>提供基础的文本编辑和是所有被<strong>Swing</strong>提供的文本编辑<strong>kit</strong> <code>eg:StyledEditorKit 提供styled text的编辑命令</code>的父类 。所以它是被所有的文本组件兼容的，除非那些是为了习惯化重载了的。</p>
+</li>
+<li><p>为了效率，文本组件分享<strong>Action</strong>。这个分享的特性<code>characteristic</code>有两个重要的衍生<code>ramifications</code></p>
+<ul>
+<li><p>你不需要修改<strong>Action</strong>对象你从<strong>Editor Kits</strong>。如果你做了，这个将影响在你项目中的所有文本组件</p>
+</li>
+<li><p><strong>Action</strong>能够运行在其他文本组件。如果你不想分享，实例化<strong>Action</strong>对象</p>
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="Associating-Text-Actions-With-Key-Strokes"><a href="#Associating-Text-Actions-With-Key-Strokes" class="headerlink" title="Associating Text Actions With Key Strokes"></a>Associating Text Actions With Key Strokes</h5><p>使用文本组件的<strong>Input Map</strong>联系<strong>Key Stroke</strong>的<strong>Action</strong>。了解更多的<strong>Input Binding</strong><a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/keybinding.html" target="_blank" rel="noopener">信息</a></p>
+<ol>
+<li><p>下述代码添加<strong>Ctrl-B</strong>键绑定<strong>TextPane</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">InputMap inputMap = textPane.getInputMap();</span><br><span class="line">KeyStroke key = KeyStroke.getKeyStoke(KeyEvent.VK_B,Event.CTRL_MASK);</span><br><span class="line">inputMap.put(key,DefaultEditorKit.backwardAction);</span><br></pre></td></tr></table></figure>
+<p>首先，这个代码获得了文本组件的<strong>Input Map</strong>。然后，它发现表示<strong>Ctrl-B</strong>键对的一个<strong><a href="https://docs.oracle.com/javase/8/docs/api/javax/swing/KeyStroke.html" target="_blank" rel="noopener">KeyStroke</a></strong>对象。最后，这个代码绑定这个<strong>Key Stroke</strong>到光标后退的<strong>Action</strong></p>
+</li>
+</ol>
+<h5 id="Implementing-Undo-and-Redo"><a href="#Implementing-Undo-and-Redo" class="headerlink" title="Implementing Undo and Redo"></a>Implementing Undo and Redo</h5><p>实现撤销和重做有两部分</p>
+<ul>
+<li><p>记住撤销的编辑文本</p>
+<p>为了支持撤销和重做，文本组件必须记住每次编辑文本的发生，编辑的顺序和在每次需要撤销的编辑中什么是需要的。<strong><a href="https://docs.oracle.com/javase/8/docs/api/javax/swing/undo/UndoManager.html" target="_blank" rel="noopener">UndoManager</a></strong>类可以管理这些撤销的编辑的表单。 </p>
+<p><code>step1:实例化一个UndoManager</code></p>
+<p><code>step2:在document中添加UndoListener,为UndoMana获取上次编辑的内容</code></p>
+<p><strong>查看更多的关于撤销编辑监听器<code>undoable edit listener</code>和撤销编辑事件，请看<a href="https://docs.oracle.com/javase/tutorial/uiswing/events/undoableeditlistener.html" target="_blank" rel="noopener">How to Write an Undoable Edit Listener</a></strong></p>
+</li>
+<li><p>实现撤销和重做命令和为它们提供使用者接口</p>
+<p><code>step1:添加实现undo和redo的Action放在需要添加Action的组件</code></p>
+<p><code>step2:实现undo和redo的abstractAction</code></p>
+</li>
+</ul>
+<h5 id="Implementing-a-Document-Filter"><a href="#Implementing-a-Document-Filter" class="headerlink" title="Implementing a Document Filter"></a>Implementing a Document Filter</h5><p><code>step1:创造一个DocumentFilter的子类</code></p>
+<p><code>step2:使用一个定义在AbstractDocument的setDocumentFilter方法附着它到document</code></p>
+<p>: Note 默认<strong>Swing</strong>文本组件使用<strong>AbstractDocument</strong>子类作为它们的<strong>document</strong></p>
+<h5 id="Listening-for-changes-on-a-Document"><a href="#Listening-for-changes-on-a-Document" class="headerlink" title="Listening for changes on a Document"></a>Listening for changes on a Document</h5><p>你能够在<strong>document</strong>注册两种不同的监听器 <strong>document listener and undoable edit listeners</strong></p>
+<p>查看更多<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/generaltext.html#undo" target="_blank" rel="noopener"><strong>undoable edit listener</strong></a></p>
+<p>使用<strong>document listener</strong>来加入发生插入和删除或者文本风格改变时候的反应</p>
+<p><code>step1:创造一个实现了DocumentListener的子类</code></p>
+<p><code>step2:在doc的addDocumentListener添加上述类</code></p>
+<p>监听器实现三个不同的文档事件<code>insertion,removal,stylechanges</code></p>
+<p>关于更多的文档监听器信息和文档事件，查看<a href="https://docs.oracle.com/javase/tutorial/uiswing/events/documentlistener.html" target="_blank" rel="noopener">How to Write a Document Listener</a></p>
+<h6 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h6><p><strong>你可能想在文档监听器修改文档文本，但是，这个是不允许在文档监听器修改的。因为这样可能导致项目死锁问题。你可以使用格式化的文本字段<code>field</code>或者提供一个document过滤器达到修改的目的</strong></p>
+<h5 id="Listening-for-Caret-and-Selection-Changes"><a href="#Listening-for-Caret-and-Selection-Changes" class="headerlink" title="Listening for Caret and Selection Changes"></a>Listening for Caret and Selection Changes</h5><p><strong>TextComponentDemo</strong>项目使用<strong>caret</strong>监听器展示<code>caret</code>目前的位置。如果文本是被选择，那么扩展选择</p>
+<p><code>step1:创造一个实现了CaretListener的类</code></p>
+<p><code>step2:在文本组件addCaretListener类中添加上述的类</code></p>
+<p><code>step3:必须实现的方法 caretUpdate</code></p>
+<p>更多的信息关于<code>caret监听器和caret事件</code>，请看<a href="https://docs.oracle.com/javase/tutorial/uiswing/events/caretlistener.html" target="_blank" rel="noopener">How to Write Caret Listener</a></p>
+<p>如果你想要改变<strong>Caret</strong>或者<strong>Selection</strong>，使用<strong>navigation filter</strong>或者<strong>习惯化的caret</strong></p>
+<ul>
+<li>实现<strong>navigation filter</strong><ul>
+<li>写一个<strong>NavigationFilter</strong>的子类</li>
+<li>通过setNavigationFilter方法添加子类的实现到文本组件</li>
+</ul>
+</li>
+<li>实现习惯化的<strong>caret</strong><ul>
+<li>实现<strong>Caret</strong>接口，或者扩展<strong>DefaultCarets</strong>类</li>
+<li>通过setCaret方法添加子类的实现到文本组件</li>
+</ul>
+</li>
+</ul>
+<h5 id="文本组件API"><a href="#文本组件API" class="headerlink" title="文本组件API"></a>文本组件API</h5><p>这些<strong>API</strong>列举在这个部分包括下述的目录</p>
+<ul>
+<li><p>设置属性<code>JTextComponent类</code></p>
+<p>编辑,组件之间边距等</p>
+</li>
+<li><p>操控选择部分</p>
+</li>
+<li><p>传递介于<strong>Model</strong>和<strong>View</strong>的<strong>Position</strong></p>
+</li>
+<li><p>文本编辑命令 </p>
+<p><strong>cut,copy</strong></p>
+</li>
+<li><p>表示<strong>Document</strong>的类和接口</p>
+</li>
+<li><p>工作在<strong>Document</strong></p>
+</li>
+<li><p>操控<a href="https://docs.oracle.com/javase/tutorial/uiswing/components/textapi.html#carrots" target="_blank" rel="noopener">Carets and Selection Highlighters</a> </p>
+</li>
+<li><p>阅读和写文本</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/api/" rel="tag"># api</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/api-JKeyEvent.html" rel="next" title="j按键事件">
+                <i class="fa fa-chevron-left"></i> j按键事件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/extension-Linux命令.html" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="XIAOHAO" />
+            
+              <p class="site-author-name" itemprop="name">XIAOHAO</p>
+              <p class="site-description motion-element" itemprop="description">EASY EASY GAME</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Nautilus-Nemo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:natiluswwnemo@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-globe"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-globe"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-globe"></i>YouTube</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JTextComponent"><span class="nav-number">1.</span> <span class="nav-text">JTextComponent</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于Documents"><span class="nav-number">1.1.</span> <span class="nav-text">关于Documents</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于Editor-Kits"><span class="nav-number">1.2.</span> <span class="nav-text">关于Editor Kits</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TextComponentDemo"><span class="nav-number">1.3.</span> <span class="nav-text">TextComponentDemo</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Associating-Text-Actions-with-menus-and-Buttons"><span class="nav-number">1.3.1.</span> <span class="nav-text">Associating Text Actions with menus and Buttons</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Associating-Text-Actions-With-Key-Strokes"><span class="nav-number">1.3.2.</span> <span class="nav-text">Associating Text Actions With Key Strokes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Implementing-Undo-and-Redo"><span class="nav-number">1.3.3.</span> <span class="nav-text">Implementing Undo and Redo</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Implementing-a-Document-Filter"><span class="nav-number">1.3.4.</span> <span class="nav-text">Implementing a Document Filter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Listening-for-changes-on-a-Document"><span class="nav-number">1.3.5.</span> <span class="nav-text">Listening for changes on a Document</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#警告"><span class="nav-number">1.3.5.1.</span> <span class="nav-text">警告</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Listening-for-Caret-and-Selection-Changes"><span class="nav-number">1.3.6.</span> <span class="nav-text">Listening for Caret and Selection Changes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文本组件API"><span class="nav-number">1.3.7.</span> <span class="nav-text">文本组件API</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XIAOHAO</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("5cF4jJXnHJjA0AwoeJJNOOXC-gzGzoHsz", "L9F4E01DGKT8abJFz8SBdS4m");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
