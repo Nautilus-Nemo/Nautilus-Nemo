@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://log.xiaohaoming.com/2018/11/extension-Linux%E5%91%BD%E4%BB%A4.html</loc>
+    
+    <lastmod>2018-11-05T14:17:54.417Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://log.xiaohaoming.com/2018/10/algorithm-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html</loc>
     
     <lastmod>2018-10-27T11:42:25.075Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>http://log.xiaohaoming.com/2018/09/deploy-Redis.html</loc>
     
     <lastmod>2018-09-25T13:55:48.486Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://log.xiaohaoming.com/2018/09/extension-Linux%E5%91%BD%E4%BB%A4.html</loc>
-    
-    <lastmod>2018-09-25T13:54:17.416Z</lastmod>
     
   </url>
   
